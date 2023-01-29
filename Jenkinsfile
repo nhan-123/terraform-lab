@@ -16,18 +16,18 @@ pipeline {
         sh 'terraform init'
       }
     }
-  //   stage('Plan Resources') {
-  //     steps {
-  //       sh 'terraform plan'
-  //     }
-  //   }
-  //   stage('Apply Resources') {
-  //     input {
-  //       message "Do you want to proceed for production deployment?"
-  //     }
-  //     steps {
-  //       sh 'terraform apply -auto-approve'
-  //     }
-  //   }
+    stage('Plan Resources') {
+      steps {
+        sh 'terraform plan'
+      }
+    }
+    stage('Apply Resources') {
+      input {
+        message "Do you want to proceed for production deployment?"
+      }
+      steps {
+        sh 'terraform apply -auto-approve'
+      }
+    }
   }
 }
