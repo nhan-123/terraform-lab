@@ -1,14 +1,3 @@
-terraform {
-  backend "s3" {
-    bucket         = "terraform-734557485568-s3-backend"
-    key            = "terraform-jenkins"
-    region         = "us-east-2"
-    encrypt        = true
-    role_arn       = "arn:aws:iam::734557485568:role/Terraform-734557485568S3BackendRole"
-    dynamodb_table = "terraform-734557485568-s3-backend"
-  }
-}
-
 provider "vault" {}
 
 data "vault_aws_access_credentials" "creds" {
@@ -20,6 +9,17 @@ provider "aws" {
   region     = "us-east-2"
   access_key = data.vault_aws_access_credentials.creds.access_key
   secret_key = data.vault_aws_access_credentials.creds.secret_key
+}
+
+terraform {
+  backend "s3" {
+    bucket         = "terraform-734557485568-s3-backend"
+    key            = "terraform-jenkins"
+    region         = "us-east-2"
+    encrypt        = true
+    role_arn       = "arn:aws:iam::734557485568:role/Terraform-734557485568S3BackendRole"
+    dynamodb_table = "terraform-734557485568-s3-backend"
+  }
 }
 
 data "aws_ami" "ami" {
