@@ -11,6 +11,9 @@ pipeline {
   // }
 
   stages {
+    stage("get cred") {
+      withVault(configuration: [timeout: 60, vaultCredentialId: 'vault-jenkins-role', vaultUrl: 'http://192.168.56.109:8200'], vaultSecrets: [[path: 'ui/vault/secrets', secretValues: [[vaultKey: 'ec2-role']]]]) {}
+    }
     stage('Init Provider') {
       steps {
         sh 'terraform init'

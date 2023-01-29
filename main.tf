@@ -1,15 +1,15 @@
-provider "vault" {}
+# provider "vault" {}
 
-data "vault_aws_access_credentials" "creds" {
-  backend = "aws"
-  role    = "ec2-role"
-}
+# data "vault_aws_access_credentials" "creds" {
+#   backend = "aws"
+#   role    = "ec2-role"
+# }
 
-provider "aws" {
-  region     = "us-east-2"
-  access_key = data.vault_aws_access_credentials.creds.access_key
-  secret_key = data.vault_aws_access_credentials.creds.secret_key
-}
+# provider "aws" {
+#   region     = "us-east-2"
+#   access_key = data.vault_aws_access_credentials.creds.access_key
+#   secret_key = data.vault_aws_access_credentials.creds.secret_key
+# }
 
 terraform {
   backend "s3" {
