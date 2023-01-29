@@ -13,6 +13,19 @@ provider "aws" {
   region = "us-east-2"
 }
 
+provider "vault" {}
+
+data "vault_aws_access_credentials" "creds" {
+  backend = "aws"
+  role    = "ec2-role"
+}
+
+provider "aws" {
+  region     = "us-west-2"
+  access_key = data.vault_aws_access_credentials.creds.access_key
+  secret_key = data.vault_aws_access_credentials.creds.secret_key
+}
+
 data "aws_ami" "ami" {
   most_recent = true
 
